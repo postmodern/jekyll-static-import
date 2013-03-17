@@ -137,10 +137,10 @@ module Jekyll
       end
 
       #
-      # Converts the content node into a Markdown document.
+      # Converts the HTML content into a Markdown document.
       #
-      # @param [Nokogiri::HTML::Node] content_node
-      #   The HTML node containing the content.
+      # @param [Nokogiri::HTML::Document] doc
+      #   The HTML document to convert.
       #
       # @return [Kramdown::Document]
       #   The Markdown document.
