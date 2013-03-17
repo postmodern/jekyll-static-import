@@ -142,6 +142,14 @@ describe Converter do
   end
 
   describe "#page" do
+    subject do
+      described_class.new(
+        content_xpath,
+        :remove => '#extended',
+        :inline => 'span.bold'
+      )
+    end
+
     it "should generate the YAML front matter" do
       subject.page(doc).should include(%{
 ---
