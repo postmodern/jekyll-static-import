@@ -113,5 +113,20 @@ describe Converter do
     it "should convert the inner HTML to Markdown" do
       subject.to_markdown(doc).should == "# Title\n\nfoo bar\n\n"
     end
+
+    context "when there is no content node" do
+      let(:doc) do
+        Nokogiri::HTML(%{
+          <html>
+            <body>
+            </body>
+          </html>
+        })
+      end
+
+      it "should return an empty String" do
+        subject.to_markdown(doc).should == ''
+      end
+    end
   end
 end
