@@ -151,7 +151,7 @@ describe Converter do
     end
 
     it "should generate the YAML front matter" do
-      subject.page(doc).should include(%{
+      subject.page(doc).should start_with(%{
 ---
 layout: default
 title: "Foo - Bar"
