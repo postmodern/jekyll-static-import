@@ -164,7 +164,8 @@ module Jekyll
       def page(doc)
         title = title(doc)
 
-        page = ['---']
+        page = []
+        page << '---'
         page << "layout: #{@layout}"
         page << "title: #{title.inspect}" if title
         page << '---'
