@@ -4,6 +4,16 @@ module Jekyll
   module Import
     class Converter
 
+      # The layout to use for each Jekyll page.
+      #
+      # @return [String]
+      attr_reader :layout
+
+      # XPath/CSS-path expression for the title node.
+      #
+      # @return [String]
+      attr_reader :title_xpath
+
       # XPath/CSS-path expression for the content node.
       #
       # @return [String]
@@ -20,10 +30,27 @@ module Jekyll
       attr_reader :remove_xpaths
 
       def initialize(content_xpath,options={})
+        @layout = options.fetch(:layout,'default')
+
+        @title_xpath   = options.fetch(:title,'//title')
         @content_xpath = content_xpath
 
         @inline_xpaths = Array(options[:inline])
         @remove_xpaths = Array(options[:remove])
+      end
+
+      #
+      # Extracts the title from the page.
+      #
+      # @param [Nokogiri::HTML::Document] doc
+      #   The HTML document.
+      #
+      # @return [String, nil]
+      #   
+      def title(doc)
+        if (title = doc.at(@title_xpath))
+          title.inner_text
+        end
       end
 
       #
@@ -102,6 +129,28 @@ module Jekyll
         else
           ''
         end
+      end
+
+      #
+      # Converts HTML into a Jekyll page.
+      #
+      # @param [Nokogiri::HTML::Document] doc
+      #   The HTML document to convert.
+      #
+      # @return [String]
+      #   The converted Jekyll page.
+      #
+      def page(doc)
+        title = title(doc)
+
+        page = ['---']
+        page << "layout: #{@layout}"
+        page << "title: #{title.inspect}" if title
+        page << '---'
+        page << ''
+        page << markdown(doc)
+
+        return page.join($/)
       end
 
     end

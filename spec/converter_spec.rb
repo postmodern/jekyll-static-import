@@ -50,6 +50,10 @@ describe Converter do
   let(:doc) do
     Nokogiri::HTML(%{
       <html>
+        <head>
+          <title>Foo - Bar</title>
+        </head>
+
         <body>
           <div class="content">
             <h1>Title</h1>
@@ -64,7 +68,14 @@ describe Converter do
     })
   end
 
-  let(:content_node) { doc.at(content_xpath) }
+  let(:title)        { doc.at('//title').inner_text }
+  let(:content_node) { doc.at(content_xpath)        }
+
+  describe "#title" do
+    it "should return the title text" do
+      subject.title(doc).should == title
+    end
+  end
 
   describe "#content" do
     it "should return the content node" do
@@ -126,6 +137,44 @@ describe Converter do
 
       it "should return an empty String" do
         subject.markdown(doc).should == ''
+      end
+    end
+  end
+
+  describe "#page" do
+    it "should generate the YAML front matter" do
+      subject.page(doc).should include(%{
+---
+layout: default
+title: "Foo - Bar"
+---
+      }.strip)
+    end
+
+    it "should append the markdown content of the HTML document" do
+      subject.page(doc).should end_with(subject.markdown(doc))
+    end
+
+    context "when there is no title" do
+      let(:doc) do
+        Nokogiri::HTML(%{
+          <html>
+            <body>
+              <div class="content">
+                <h1>Title</h1>
+    
+                <p>foo <span class="bold">bar</span></p>
+    
+                <div id="extended">
+                </div>
+              </div>
+            </body>
+          </html>
+        })
+      end
+
+      it "should omit the 'title:' attribute" do
+        subject.page(doc).should_not include('title: ')
       end
     end
   end
