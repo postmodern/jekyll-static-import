@@ -120,6 +120,23 @@ module Jekyll
       end
 
       #
+      # Extracts and sanitizes the HTML content.
+      #
+      # @param [Nokogiri::HTML::Document] doc
+      #   The HTML document to convert.
+      #
+      # @return [String]
+      #   The raw HTML content.
+      #
+      def html(doc)
+        if (content_node = content(doc))
+          sanitize(content_node).inner_html
+        else
+          ''
+        end
+      end
+
+      #
       # Converts the content node into a Markdown document.
       #
       # @param [Nokogiri::HTML::Node] content_node
@@ -128,11 +145,8 @@ module Jekyll
       # @return [Kramdown::Document]
       #   The Markdown document.
       #
-      def convert(content_node)
-        Kramdown::Document.new(
-          content_node.inner_html,
-          :input => :html
-        )
+      def kramdown(doc)
+        Kramdown::Document.new(html(doc),:input => :html)
       end
 
       #
@@ -145,11 +159,7 @@ module Jekyll
       #   The converted markdown.
       #
       def markdown(doc)
-        if (content_node = content(doc))
-          convert(sanitize(content_node)).to_kramdown
-        else
-          ''
-        end
+        kramdown(doc).to_kramdown
       end
 
       #

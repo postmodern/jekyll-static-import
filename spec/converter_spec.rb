@@ -114,7 +114,7 @@ describe Converter do
   describe "#convert" do
   end
 
-  describe "#to_markdown" do
+  describe "#markdown" do
     subject do
       described_class.new(
         content_xpath,
