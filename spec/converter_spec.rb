@@ -52,6 +52,8 @@ describe Converter do
       <html>
         <body>
           <div class="content">
+            <h1>Title</h1>
+
             <p>foo <span class="bold">bar</span></p>
 
             <div id="extended">
@@ -93,6 +95,23 @@ describe Converter do
         
         content_node.at('p').inner_text.should == 'foo bar'
       end
+    end
+  end
+
+  describe "#convert" do
+  end
+
+  describe "#to_markdown" do
+    subject do
+      described_class.new(
+        content_xpath,
+        :remove => '#extended',
+        :inline => 'span.bold'
+      )
+    end
+
+    it "should convert the inner HTML to Markdown" do
+      subject.to_markdown(doc).should == "# Title\n\nfoo bar\n\n"
     end
   end
 end
