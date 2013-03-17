@@ -29,6 +29,27 @@ module Jekyll
       # @return [Array<String>]
       attr_reader :remove_xpaths
 
+      #
+      # Initializes the Converter.
+      #
+      # @param [String] content_xpath
+      #   The XPath/CSS-path expression for the content node.
+      #
+      # @param [Hash] options
+      #   Additional options.
+      #
+      # @option options [String] :layout ('default')
+      #   The layout to use for each Jekyll page.
+      #
+      # @option options [String] :title ('//title')
+      #   The XPath/CSS-path expression for the title node.
+      #
+      # @option options [Array<String>, String] :inline
+      #   List of XPath/CSS-path expressions for nodes to inline.
+      #
+      # @option options [Array<String>, String] :remove
+      #   List of XPath/CSS-path expressions for nodes to remove.
+      #
       def initialize(content_xpath,options={})
         @layout = options.fetch(:layout,'default')
 
