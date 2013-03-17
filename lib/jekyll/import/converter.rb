@@ -7,23 +7,23 @@ module Jekyll
       # XPath/CSS-path expression for the content node.
       #
       # @return [String]
-      attr_reader :content
+      attr_reader :content_xpath
 
       # List of XPath/CSS-path expressions for nodes to inline.
       #
       # @return [Array<String>]
-      attr_reader :inline
+      attr_reader :inline_xpaths
 
       # List of XPath/CSS-path expressions for nodes to remove.
       #
       # @return [Array<String>]
-      attr_reader :remove
+      attr_reader :remove_xpaths
 
-      def initialize(content,options={})
-        @content = content
+      def initialize(content_xpath,options={})
+        @content_xpath = content_xpath
 
-        @inline = Array(options[:inline])
-        @remove = Array(options[:remove])
+        @inline_xpaths = Array(options[:inline])
+        @remove_xpaths = Array(options[:remove])
       end
 
       #
@@ -36,7 +36,7 @@ module Jekyll
       #   The HTML content node.
       #
       def content(doc)
-        doc.at(@content)
+        doc.at(@content_xpath)
       end
 
       #
@@ -55,14 +55,14 @@ module Jekyll
         end
 
         # remove additional nodes
-        @remove.each do |expr|
+        @remove_xpaths.each do |expr|
           content_node.search(expr).each do |node|
             node.remove
           end
         end
 
         # inline the text of various nodes
-        @inline.each do |expr|
+        @inline_xpaths.each do |expr|
           content_node.search(expr).each do |node|
             node.replace(node.inner_text)
           end
