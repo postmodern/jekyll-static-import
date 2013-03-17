@@ -10,6 +10,8 @@ describe Converter do
 
   describe "#initialize" do
     context "with defaults" do
+      its(:layout)        { should == 'default' }
+      its(:title_xpath)   { should == '//title' }
       its(:inline_xpaths) { should be_empty }
       its(:remove_xpaths) { should be_empty }
     end
