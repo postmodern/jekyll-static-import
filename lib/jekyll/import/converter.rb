@@ -96,7 +96,7 @@ module Jekyll
       # @return [String]
       #   The converted markdown.
       #
-      def to_markdown(doc)
+      def markdown(doc)
         if (content_node = content(doc))
           convert(sanitize(content_node)).to_kramdown
         else

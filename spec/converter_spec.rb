@@ -111,7 +111,7 @@ describe Converter do
     end
 
     it "should convert the inner HTML to Markdown" do
-      subject.to_markdown(doc).should == "# Title\n\nfoo bar\n\n"
+      subject.markdown(doc).should == "# Title\n\nfoo bar\n\n"
     end
 
     context "when there is no content node" do
@@ -125,7 +125,7 @@ describe Converter do
       end
 
       it "should return an empty String" do
-        subject.to_markdown(doc).should == ''
+        subject.markdown(doc).should == ''
       end
     end
   end
