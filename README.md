@@ -1,29 +1,25 @@
-# jekyll-import
+# jekyll-static-import
 
-* [Homepage](https://github.com/postmodern/jekyll-import#readme)
-* [Issues](https://github.com/postmodern/jekyll-import/issues)
-* [Documentation](http://rubydoc.info/gems/jekyll-import/frames)
+* [Homepage](https://github.com/postmodern/jekyll-static-import#readme)
+* [Issues](https://github.com/postmodern/jekyll-static-import/issues)
+* [Documentation](http://rubydoc.info/gems/jekyll-static-import/frames)
 * [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
 
-Spiders a website, extracts the content, and converts the HTML into Markdown,
-for [Jekyll].
+Spiders static websites, extracts the content, and converts the HTML into
+Markdown, for [Jekyll].
 
 ## Features
 
-* Spiders entire websites.
+* Spiders static websites.
 * Sanitizes HTML.
 * Converts HTML into Markdown.
 * Generates [Jekyll] pages.
 
-## Examples
-
-    require 'jekyll/import'
-
 ## Synopsis
 
-    $ jekyll-import http://www.example.com/ -o www.example.com/
+    $ jekyll-static-import http://www.example.com/ -o www.example.com/
 
 ## Requirements
 
@@ -32,7 +28,7 @@ for [Jekyll].
 
 ## Install
 
-    $ gem install jekyll-import
+    $ gem install jekyll-static-import
 
 ## Copyright
 

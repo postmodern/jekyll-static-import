@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'jekyll/import/converter'
+require 'jekyll/static/import/converter'
 
 require 'nokogiri'
 

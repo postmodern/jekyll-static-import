@@ -1,5 +1,5 @@
 gem 'rspec', '~> 2.4'
 require 'rspec'
-require 'jekyll/import/version'
+require 'jekyll/static/import/version'
 
-include Jekyll::Import
+include Jekyll::Static::Import

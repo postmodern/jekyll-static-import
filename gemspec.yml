@@ -1,12 +1,12 @@
-name: jekyll-import
+name: jekyll-static-import
 summary: Import static HTML websites into Jekyll
 description:
-  Spiders a website, extracts the content, and converts the HTML into Markdown.
-
+  Spiders static websites, extracts the content, and converts the HTML into
+  Markdown.
 license: MIT
 authors: Postmodern
 email: postmodern.mod3@gmail.com
-homepage: https://github.com/postmodern/jekyll-import#readme
+homepage: https://github.com/postmodern/jekyll-static-import#readme
 
 dependencies:
   kramdown: ~> 0.14
